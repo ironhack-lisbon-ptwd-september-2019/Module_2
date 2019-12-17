@@ -26,7 +26,12 @@ router.get('/books', (req, res) => {
 });
 
 router.get('/books/add', (req, res) => {
-  res.render('book-add');
+  Author.find().then(authors => {
+    console.log("authors", authors);
+    res.render('book-add', {
+      authors
+    });
+  });
 });
 
 router.post('/books/add', (req, res) => {
@@ -54,6 +59,7 @@ router.post('/books/add', (req, res) => {
 
 router.post('/books/edit', (req, res) => {
   let bookId = req.query.book_id;
+  console.log("author", req.body.author);
   const {
     title,
     author,
